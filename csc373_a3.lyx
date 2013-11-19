@@ -124,8 +124,8 @@ Giving graph
 \end_layout
 
 \begin_layout Standard
-The vertifier will check if the function will do the mapping properly which
- is for all 
+The vertifier will check if the function will do the mapping properly such
+ that for all 
 \begin_inset Formula $vu\in E(G)$
 \end_inset
 
@@ -189,7 +189,7 @@ If
 \begin_deeper
 \begin_layout Quote
 If 
-\begin_inset Formula $f(u)f(v)\notin E(G)$
+\begin_inset Formula $f(u)f(v)\notin E(H)$
 \end_inset
 
  then Return false 
@@ -223,47 +223,61 @@ Because the
 \begin_inset Formula $H$
 \end_inset
 
- are in the form of adjacency matrix .
- Then the size of the input 
-\begin_inset Formula $n=O(|V(G)|^{2}+|V(H)|^{2})$
+ are in the form of adjacency matrix, the input size is space required for
+ the two graphs, which is 
+\begin_inset Formula $n=\Theta(|V(G)|^{2}+|V(H)|^{2})$
 \end_inset
 
-
+.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Size of vertifier
+Size of certificate
 \end_layout
 
 \begin_deeper
+\begin_layout Standard
+The mapping function 
+\begin_inset Formula $f$
+\end_inset
+
+ needs to be encoded into the certificate.
+\end_layout
+
 \begin_layout Standard
 Then the size of the certificate is 
 \begin_inset Formula $O(|V(G)|)$
 \end_inset
 
- because it is an array having 
+ because it is an array with 
 \begin_inset Formula $|V(G)|\in O(\sqrt{n})$
 \end_inset
 
- elements
+ elements.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Veritifier running time.
+Verifier running time.
 \end_layout
 
 \begin_deeper
 \begin_layout Standard
-Assume that a mapping of function 
+Assume that the mapping by function 
 \begin_inset Formula $f$
 \end_inset
 
- takes constant time.
- And a check if an edge is in the graph or not also takes constant time.
+ takes constant time because it's an array lookup.
+ Checking if an edge is in the graph or not also takes constant time by
+ lookup in adjacency matrix.
  Then the total running time of the vertifier is 
 \begin_inset Formula $O(|V(G)|^{2})\in O(n)$
+\end_inset
+
+ because we are doing constant-time checking in every pair of vertices in
+ 
+\begin_inset Formula $G$
 \end_inset
 
 .
@@ -297,7 +311,7 @@ Assume
 \begin_inset Formula $G,H,f$
 \end_inset
 
-, it doesnt exist any two nodes 
+, there doesn't exist any two nodes 
 \begin_inset Formula $u,v\in V(G)$
 \end_inset
 
@@ -306,12 +320,13 @@ Assume
 \end_inset
 
  and 
-\begin_inset Formula $f(u)f(v)\notin E(G)$
+\begin_inset Formula $f(u)f(v)\notin E(H)$
 \end_inset
 
  to make the vertifier return false.
  Then the vertifier will return True .
- Then there is a certificate so that the vertifier will accept it 
+ Then there exists a certificate for this pair of graphs, so the vertifier
+ will accept it.
 \end_layout
 
 \begin_layout Standard
@@ -332,11 +347,32 @@ Assume
 \end_inset
 
 .
- Then when given 
+ This is equivalent to for all function 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+, there exists some 
+\begin_inset Formula $vu\in E(G)$
+\end_inset
+
+ such that 
+\begin_inset Formula $f(v)f(u)\notin E(H)$
+\end_inset
+
+.
+ Then for the input 
+\begin_inset Formula $G,H$
+\end_inset
+
+, for any function 
+\begin_inset Formula $f$
+\end_inset
+
+, the verifier given 
 \begin_inset Formula $G,H,f$
 \end_inset
 
-, it always exists two nodes 
+ will always find two nodes 
 \begin_inset Formula $u,v\in V(G)$
 \end_inset
 
@@ -345,12 +381,11 @@ Assume
 \end_inset
 
  and 
-\begin_inset Formula $f(u)f(v)\in E(G)$
+\begin_inset Formula $f(u)f(v)\notin E(H)$
 \end_inset
 
- to make the vertifier return True.
- Then the vertifier always returns False.
- Then there is no certificate so that the vertifier will accept it 
+, hence returning False.
+ Then there is no certificate that the verifier will accept.
 \end_layout
 
 \end_deeper
@@ -359,12 +394,769 @@ Assume
 )
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Input: two graphs 
+\begin_inset Formula $G,H$
+\end_inset
+
+, and a function
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f:S\subseteq V(G)\rightarrow V(H)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Output: True if there exists some function 
+\begin_inset Formula $f':V(G)\rightarrow V(H)$
+\end_inset
+
+ such that if 
+\begin_inset Formula $v\in S\implies f'(v)=f(v)$
+\end_inset
+
+ and 
+\begin_inset Formula $<G,H,f'>$
+\end_inset
+
+ is accepted by the 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+ verifier, and False otherwise.
+ Intuitively, it will accept if halfway-defined mapping of vertices in G
+ to vertices in H could be extended to the homomorphism of G to H, or the
+ full mapping f' such that for all 
+\begin_inset Formula $vu\in E(G)$
+\end_inset
+
+, 
+\begin_inset Formula $f'(v)f'(u)\in E(H)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Reduction from 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+ to 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Given input 
+\begin_inset Formula $<G,H>$
+\end_inset
+
+ to 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+, compute 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ on input 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+ where 
+\begin_inset Formula $f$
+\end_inset
+
+ is an empty function, or is undefined, and return True iff 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ returns True.
+ The reduction takes constant time.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Reduction correctness
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Since the empty function 
+\begin_inset Formula $f$
+\end_inset
+
+ does not limit any mappings from 
+\begin_inset Formula $V(G)$
+\end_inset
+
+ to 
+\begin_inset Formula $V(H)$
+\end_inset
+
+, any valid mapping function 
+\begin_inset Formula $f':V(G)\rightarrow V(H)$
+\end_inset
+
+ for homomorphism of 
+\begin_inset Formula $G$
+\end_inset
+
+ to 
+\begin_inset Formula $H$
+\end_inset
+
+ is an extension of 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then if such 
+\begin_inset Formula $f'$
+\end_inset
+
+ exists, or if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $<G,H>$
+\end_inset
+
+ is accepted by 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+,
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ will also accept 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $<G,H>$
+\end_inset
+
+ is not accepted by 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+, then there is no such 
+\begin_inset Formula $f'$
+\end_inset
+
+to extend 
+\begin_inset Formula $f$
+\end_inset
+
+ into, therefore 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ will also not accept 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Reduction from 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ to 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Reduction correctness
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 )
 \end_layout
 
+\begin_deeper
 \begin_layout Enumerate
-)
+\begin_inset Formula $GraphHomoSearch$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Input: two graphs 
+\begin_inset Formula $<G,H>$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Output: 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ such that for all 
+\begin_inset Formula $vu\in E(G)$
+\end_inset
+
+, 
+\begin_inset Formula $f(v)f(u)\in E(H)$
+\end_inset
+
+.
+ In otherwords, we want to find mapping 
+\begin_inset Formula $f$
+\end_inset
+
+ of 
+\begin_inset Formula $V(G)$
+\end_inset
+
+ to 
+\begin_inset Formula $V(H)$
+\end_inset
+
+ such that the verifier of 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+ will accept 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Reduction from 
+\begin_inset Formula $GraphHomoSearch$
+\end_inset
+
+ to 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+High-level idea behind:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Start with empty function 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ Check that a solution exists by computing 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+to 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+.
+ If it rejects, then there is no solution, so return 
+\begin_inset Formula $False.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If there exists a solution, we will find one by building the solution vertex-by-
+vertex.
+ For each vertex 
+\begin_inset Formula $v\in E(G)$
+\end_inset
+
+, guess its mapping to some vertex 
+\begin_inset Formula $u\in E(H)$
+\end_inset
+
+ and define 
+\begin_inset Formula $f(v)=u$
+\end_inset
+
+.
+ Compute 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ on 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+ and if it accepts, continue to next vertex in 
+\begin_inset Formula $G$
+\end_inset
+
+.
+ Otherwise, pick another vertex 
+\begin_inset Formula $w\in H$
+\end_inset
+
+ and re-define 
+\begin_inset Formula $f(v)=w$
+\end_inset
+
+ to try again until 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ accepts 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+ We will eventually find one because we will keep the loop invariant 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ accepts 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+ at the end of each loop.
+\end_layout
+
+\begin_layout Standard
+The algorithm takes worst-case 
+\begin_inset Formula $O(|V(G)||V(H)|)$
+\end_inset
+
+ time with 
+\begin_inset Formula $O(|V(G)||V(H)|)$
+\end_inset
+
+ calls to 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Pseudo-code
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+GraphHomoSearch(G,H):
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+\begin_inset Formula $f\leftarrow$
+\end_inset
+
+empty function
+\end_layout
+
+\begin_layout Quote
+if 
+\begin_inset Formula $GraphHomoExt(G,H,f)$
+\end_inset
+
+ == False then return False
+\end_layout
+
+\begin_layout Quote
+For 
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+For 
+\begin_inset Formula $v\in V(H)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+Define 
+\begin_inset Formula $f(u)=v$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+If 
+\begin_inset Formula $GraphHomoExt(G,H,f)$
+\end_inset
+
+ ==True then continue
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Quote
+Return 
+\begin_inset Formula $f$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Correctness
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+By Q2)b), the first check on 
+\begin_inset Formula $GraphHomoExt(G,H,f)$
+\end_inset
+
+ will determine if it is possible at all to find a mapping for homomorphism
+ of 
+\begin_inset Formula $G$
+\end_inset
+
+ to 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ If it rejects, then 
+\begin_inset Formula $GraphHomoSearch$
+\end_inset
+
+ will also fail and reject.
+ If it accepts, we know there exists some 
+\begin_inset Formula $f'$
+\end_inset
+
+ such that the verifier for 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+ accepts 
+\begin_inset Formula $<G,H,f'>$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Every iteration of outer loop will build 
+\begin_inset Formula $f$
+\end_inset
+
+ vertex-by-vertex.
+ We want to show by induction that 
+\begin_inset Formula $f$
+\end_inset
+
+ always can be extended to some 
+\begin_inset Formula $f'$
+\end_inset
+
+ such that the verifier for 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+ accepts 
+\begin_inset Formula $<G,H,f'>$
+\end_inset
+
+, or in other words 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ accepts 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Base Case: when 
+\begin_inset Formula $f$
+\end_inset
+
+ is empty function, we have verified in the beginning that 
+\begin_inset Formula $GraphHomoExt(G,H,f)$
+\end_inset
+
+ is accepted.
+\end_layout
+
+\begin_layout Standard
+Inductive hypothesis: At the end of previous loop, 
+\begin_inset Formula $GraphHomoExt(G,H,f)$
+\end_inset
+
+ is accepted.
+\end_layout
+
+\begin_layout Standard
+Inductive Step: For the chosen vertex 
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+, we are trying every combination with 
+\begin_inset Formula $v\in V(H)$
+\end_inset
+
+.
+ We know that there must exist some combination that works because otherwise
+ it means that 
+\begin_inset Formula $f$
+\end_inset
+
+ from previous loop cannot be extended to valid homomorphism of 
+\begin_inset Formula $G$
+\end_inset
+
+ to 
+\begin_inset Formula $H$
+\end_inset
+
+, contradicting the inductive hypothesis.
+ Eventually we will find definition of 
+\begin_inset Formula $f(u)$
+\end_inset
+
+ such that 
+\begin_inset Formula $GraphHomoExt(G,H,f)$
+\end_inset
+
+ is accepted, and we continue to next loop, satisfying the hypothesis.
+\end_layout
+
+\begin_layout Standard
+At the end of the loop, 
+\begin_inset Formula $f(u)$
+\end_inset
+
+ is defined for every 
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ accepts 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+ Since there is no more to define in 
+\begin_inset Formula $f$
+\end_inset
+
+, this is equivalent to verifier of 
+\begin_inset Formula $GraphHomo$
+\end_inset
+
+ accepting 
+\begin_inset Formula $<G,H,f>$
+\end_inset
+
+.
+ 
+\begin_inset Formula $GraphHomoSearch$
+\end_inset
+
+ correctly returns 
+\begin_inset Formula $f$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Reduction from 
+\begin_inset Formula $GraphHomoExt$
+\end_inset
+
+ to 
+\begin_inset Formula $GraphHomoSearch$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Correctness
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+) to be filled
 \end_layout
 
 \begin_layout Enumerate
