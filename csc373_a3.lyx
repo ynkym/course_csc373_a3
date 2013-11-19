@@ -72,8 +72,8 @@ CSC373 - Assignment 3
 \end_layout
 
 \begin_layout Author
-Yorie Nakayama - Student number: 998 72 9951 | Minh Le Hoang - Student number
- : 999 01 9930
+Minh Le Hoang - Student number : 999 01 9930 | Yorie Nakayama - Student
+ number: 998 72 9951 
 \end_layout
 
 \begin_layout Enumerate
@@ -96,5 +96,764 @@ Yorie Nakayama - Student number: 998 72 9951 | Minh Le Hoang - Student number
 )
 \end_layout
 
+\begin_deeper
+\begin_layout Standard
+Giving
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $H$
+\end_inset
+
+ be two graphs with set of nodes 
+\begin_inset Formula $V(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $V(H)$
+\end_inset
+
+ and sets of edges 
+\begin_inset Formula $E(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $E(H)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $E_{G-u-v}$
+\end_inset
+
+ is a boolean value so that with 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $v\in V(G)$
+\end_inset
+
+ then 
+\begin_inset Formula $uv\in E(G)\iff E_{G-u-v}$
+\end_inset
+
+ is true.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $E_{H-k_{1}-k_{2}}$
+\end_inset
+
+ is a boolean value so that with 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $k_{1}\in V(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{2}\in V(G)$
+\end_inset
+
+ then 
+\begin_inset Formula $k_{1}k_{2}\in E(H)\iff E_{H-k_{1}-k_{2}}$
+\end_inset
+
+ is true
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $mapNode_{u-k}$
+\end_inset
+
+ is a boolean variable so that with 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $k\in V(H)$
+\end_inset
+
+ then 
+\begin_inset Formula $f$
+\end_inset
+
+ maps 
+\begin_inset Formula $u$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+ 
+\begin_inset Formula $\iff mapNode_{u-k}$
+\end_inset
+
+ is true.
+\end_layout
+
+\begin_layout Standard
+Let define 
+\begin_inset Formula $mapping_{u}$
+\end_inset
+
+ is boolean formula so that function 
+\begin_inset Formula $f$
+\end_inset
+
+ maps node 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+ to only one node 
+\begin_inset Formula $k\in V(H)\iff mapping_{u}$
+\end_inset
+
+ is true.
+ Then
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $mapping_{u}=\bigvee_{k\in V(H)}\left(\left(\bigwedge_{k_{2}\in V(H)\backslash k}\left(\overline{mapNode_{u-k_{2}}}\right)\right)\wedge mapNode_{u-k}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then every 
+\begin_inset Formula $mapping_{u}$
+\end_inset
+
+ has 
+\begin_inset Formula $|V(H)|*|V(H)|$
+\end_inset
+
+ literals
+\end_layout
+
+\begin_layout Standard
+Let define 
+\begin_inset Formula $MAPPING$
+\end_inset
+
+ is a boolean formula so that function 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+ is a many to one function if and only if 
+\begin_inset Formula $MAPPING$
+\end_inset
+
+ is true.
+ Then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $MAPPING=\bigwedge_{u\in V(G)}\left(mapping_{u}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $MAPPING$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has 
+\begin_inset Formula $|V(H)|^{2}*|V(G)|$
+\end_inset
+
+ literals.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Let 
+\begin_inset Formula $preservingEdge_{u-v-k_{1}-k_{2}}$
+\end_inset
+
+ be a formula so that 
+\begin_inset Formula $preservingEdge_{u-v-k_{1}-k_{2}}$
+\end_inset
+
+ is true if and only if with 
+\begin_inset Formula $u,v\in V(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{1},k_{2}\in V(H)$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ maps 
+\begin_inset Formula $u$
+\end_inset
+
+ to 
+\begin_inset Formula $k_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $f$
+\end_inset
+
+ maps 
+\begin_inset Formula $v$
+\end_inset
+
+ to 
+\begin_inset Formula $k_{2}$
+\end_inset
+
+ if 
+\begin_inset Formula $uv\in E(G)\rightarrow k_{1}k_{2}\in E(H)$
+\end_inset
+
+ .
+ Then
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $preservingEdge_{u-v-k_{1}-k_{2}}=\left(mapNode_{u-k_{1}}\wedge mapNode_{v-k_{2}}\wedge E_{G-u-v}\right)\rightarrow E_{H-k_{1}-k_{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $=\overline{\left(mapNode_{u-k_{1}}\wedge mapNode_{v-k_{2}}\wedge E_{G-u-v}\right)}\vee E_{H-k_{1}-k_{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $=\overline{mapNode_{u-k_{1}}}\vee\overline{mapNode_{v-k_{2}}}\vee\overline{E_{G-u-v}}\vee E_{H-k_{1}-k_{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Then for every 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $preservingEdge_{u-v-k_{1}-k_{2}}$
+\end_inset
+
+ formula there are only 2 literals
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $PRESERVING\_EDGE$
+\end_inset
+
+ is a formula so that 
+\begin_inset Formula $PRESERVING\_EDGE$
+\end_inset
+
+ is True if 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\forall u,v\in V(G).\forall k_{1},k_{2}\in V(H).\left[\left(f\: maps\: u\: to\: k_{1}\right)\wedge\left(f\: maps\: v\: to\: k_{2}\right)\wedge\left(uv\in E(G)\right)\right]\rightarrow\left(k_{1}k_{2}\in E(H)\right)$
+\end_inset
+
+.
+ Then 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $PRESERVING\_EDGE=\bigwedge_{u\in V(G)}\left(\bigwedge_{v\in V(G)\backslash u}\left(\bigwedge_{k_{1}\in V(H)}\left(\bigwedge_{k_{2}\in V(H)\backslash k_{1}}\left[preservingEdge_{u-v-k_{1}-k_{2}}\right]\right)\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Then 
+\begin_inset Formula $PRESERVING\_EDGE$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has 
+\begin_inset Formula $|V(G)|*\left(|V(G)|-1\right)*|V(H)|*\left(|V(H)|-1\right)*2$
+\end_inset
+
+ literals
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $Homomorphism$
+\end_inset
+
+ be a formula so that 
+\begin_inset Formula $Homomorphism$
+\end_inset
+
+ is true if and only if 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+ is a many to one function and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\forall u,v\in V(G).\forall k_{1},k_{2}\in V(H).\left[\left(f\: maps\: u\: to\: k_{1}\right)\wedge\left(f\: maps\: v\: to\: k_{2}\right)\wedge\left(uv\in E(G)\right)\right]\rightarrow\left(k_{1}k_{2}\in E(H)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Then 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $Homomorphism=PRESERVING\_EDGE\wedge MAPPING$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Then 
+\begin_inset Formula $PRESERVING\_EDGE$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has 
+\begin_inset Formula $\left[|V(G)|*\left(|V(G)|-1\right)*|V(H)|*\left(|V(H)|-1\right)*2\right]+|V(H)|^{2}*|V(G)|$
+\end_inset
+
+ literals.
+\end_layout
+
+\begin_layout Standard
+We have 
+\begin_inset Formula $\left[|V(G)|*\left(|V(G)|-1\right)*|V(H)|*\left(|V(H)|-1\right)*2\right]+|V(H)|^{2}*|V(G)|\in O\left(|V(H)|^{2}*|V(G)|^{2}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Then given 
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $H$
+\end_inset
+
+,
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $Homomorphism$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ can be found in polynomial time.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+If 
+\begin_inset Formula $<G,H>\in GraphHomo$
+\end_inset
+
+, then 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+then according to the literals we can define a many to one function 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+ so that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\forall u,v\in V(G).\forall k_{1},k_{2}\in V(H).\left(uv\in E(G)\right)\rightarrow\left(f(u)f(v)\in E(H)\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $\forall u,v\in V(G).\forall k_{1},k_{2}\in V(H).\left[\left(f(u)=k_{1}\right)\wedge\left(f(v)=k_{2}\right)\wedge\left(uv\in E(G)\right)\right]\rightarrow\left(k_{1}k_{2}\in E(H)\right)$
+\end_inset
+
+, then 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $Homomorphism$
+\end_inset
+
+ is satisfiable.
+ Then 
+\begin_inset Formula $Homomorphism\in SAT$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $Homomorphism\in SAT$
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+, then 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $Homomorphism$
+\end_inset
+
+ is satisfiable.
+ Then according to the literals we can define a many to one function 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+ so that 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\forall u,v\in V(G).\forall k_{1},k_{2}\in V(H).\left[\left(f(u)=k_{1}\right)\wedge\left(f(v)=k_{2}\right)\wedge\left(uv\in E(G)\right)\right]\rightarrow\left(k_{1}k_{2}\in E(H)\right)$
+\end_inset
+
+ or 
+\begin_inset Formula $\forall u,v\in V(G).\forall k_{1},k_{2}\in V(H).\left(uv\in E(G)\right)\rightarrow\left(f(u)f(v)\in E(H)\right)$
+\end_inset
+
+.
+ Then 
+\begin_inset Formula $<G,H>\in GraphHomo$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then 
+\begin_inset Formula $GraphHomo\leq_{p}SAT$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
