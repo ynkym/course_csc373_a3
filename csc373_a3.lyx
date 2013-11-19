@@ -80,6 +80,281 @@ Minh Le Hoang - Student number : 999 01 9930 | Yorie Nakayama - Student
 )
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Verification algorithm:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+High-level idea behind:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Giving graph 
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $H$
+\end_inset
+
+ in form of adjacency matrix and certificate which is the mapping function
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f$
+\end_inset
+
+ is an array having 
+\begin_inset Formula $|V(G)|$
+\end_inset
+
+ elements and 
+\begin_inset Formula $f[u]=f(u)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The vertifier will check if the function will do the mapping properly which
+ is for all 
+\begin_inset Formula $vu\in E(G)$
+\end_inset
+
+, 
+\begin_inset Formula $f(v)f(u)\in E(H)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Pseudo-code
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box ovalbox
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Itemize
+V(G,H,f):
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+For 
+\begin_inset Formula $u\in V(G)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+For 
+\begin_inset Formula $v\in V(G)\backslash u$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+If 
+\begin_inset Formula $uv\in E(G)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+If 
+\begin_inset Formula $f(u)f(v)\notin E(G)$
+\end_inset
+
+ then Return false 
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout Quote
+Return true
+\end_layout
+
+\end_deeper
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Input size.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Because the 
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $H$
+\end_inset
+
+ are in the form of adjacency matrix .
+ Then the size of the input 
+\begin_inset Formula $n=O(|V(G)|^{2}+|V(H)|^{2})$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Size of vertifier
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Then the size of the certificate is 
+\begin_inset Formula $O(|V(G)|)$
+\end_inset
+
+ because it is an array having 
+\begin_inset Formula $|V(G)|\in O(\sqrt{n})$
+\end_inset
+
+ elements
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Veritifier running time.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Assume that a mapping of function 
+\begin_inset Formula $f$
+\end_inset
+
+ takes constant time.
+ And a check if an edge is in the graph or not also takes constant time.
+ Then the total running time of the vertifier is 
+\begin_inset Formula $O(|V(G)|^{2})\in O(n)$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Why the vertifier works ?
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Assume 
+\begin_inset Formula $<G,H>\in GraphHomo$
+\end_inset
+
+, then there is function 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+ so that for all 
+\begin_inset Formula $vu\in E(G)$
+\end_inset
+
+, 
+\begin_inset Formula $f(v)f(u)\in E(H)$
+\end_inset
+
+.
+ Then when given 
+\begin_inset Formula $G,H,f$
+\end_inset
+
+, it doesnt exist any two nodes 
+\begin_inset Formula $u,v\in V(G)$
+\end_inset
+
+ so that 
+\begin_inset Formula $uv\in E(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $f(u)f(v)\notin E(G)$
+\end_inset
+
+ to make the vertifier return false.
+ Then the vertifier will return True .
+ Then there is a certificate so that the vertifier will accept it 
+\end_layout
+
+\begin_layout Standard
+Assume 
+\begin_inset Formula $<G,H>\notin GraphHomo$
+\end_inset
+
+, then there is no function 
+\begin_inset Formula $f:V(G)\rightarrow V(H)$
+\end_inset
+
+ so that for all 
+\begin_inset Formula $vu\in E(G)$
+\end_inset
+
+, 
+\begin_inset Formula $f(v)f(u)\in E(H)$
+\end_inset
+
+.
+ Then when given 
+\begin_inset Formula $G,H,f$
+\end_inset
+
+, it always exists two nodes 
+\begin_inset Formula $u,v\in V(G)$
+\end_inset
+
+ so that 
+\begin_inset Formula $uv\in E(G)$
+\end_inset
+
+ and 
+\begin_inset Formula $f(u)f(v)\in E(G)$
+\end_inset
+
+ to make the vertifier return True.
+ Then the vertifier always returns False.
+ Then there is no certificate so that the vertifier will accept it 
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Enumerate
 )
 \end_layout
@@ -701,6 +976,34 @@ Then given
 \noun off
 \color none
  can be found in polynomial time.
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Let 
+\begin_inset Formula $<G,H>$
+\end_inset
+
+ is the string contains all information about graph 
+\begin_inset Formula $G$
+\end_inset
+
+ and 
+\begin_inset Formula $H$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
